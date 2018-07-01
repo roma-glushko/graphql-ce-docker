@@ -105,4 +105,12 @@ docker exec -it magento_os_graphql_server bash
 ./bin/magento deploy:mode:show developer
 ```
 
-docker-compose up -d --force-recreate --build
+## Enable debugging on PhpStorm
+
+TBD
+
+## Rebuild environment
+
+There can be a need to rebuild environment once changes applied:
+
+```docker-compose up -d --force-recreate --build```
