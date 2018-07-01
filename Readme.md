@@ -28,12 +28,12 @@ ipconfig getifaddr en0
 
 Navigate to `src` directory and clone magento/graphql-ce project:
 
-``
+```
 cd src
 git init
 git remote add origin https://github.com/magento/graphql-ce
 git fetch && git pull origin 2.3-develop
-`` 
+```
 
 ### Configuring hosts file
 
@@ -47,10 +47,10 @@ Need to add a new record to hosts file:
 
 Navigate to `docker` directory and use docker-compose to build environment:
 
-``
+```
 cd docker
 docker-compose up -d
-`` 
+```
 
 It can take some time to download all required images and prepare the final environment.
 
@@ -58,10 +58,10 @@ It can take some time to download all required images and prepare the final envi
 
 Once environment is built, it's possible to connect to `magento_os_graphql_server` server and run composer install:
 
-``
+```
 docker exec -it magento_os_graphql_server bash
 composer install
-``
+```
 
 ### Install Magento 2
 
@@ -100,9 +100,9 @@ This is optional step and tasks can be viewed in Github, too.
 In order to enable ability fetching information about possible Query fields, it's needed to switch Magento to
 developer mode:
 
-``
+```
 docker exec -it magento_os_graphql_server bash
 ./bin/magento deploy:mode:show developer
-``
+```
 
 docker-compose up -d --force-recreate --build
