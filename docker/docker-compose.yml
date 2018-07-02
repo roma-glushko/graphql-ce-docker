@@ -2,8 +2,8 @@ magento_os_graphql_app:
     container_name: magento_os_graphql_app
     image: busybox
     volumes:
-        - ../src:/var/www/html/
-        - ../shared/.composer:/root/.composer/
+        - ../src:/var/www/html/:cached
+        - ../shared/.composer:/root/.composer/:delegated
 
 magento_os_graphql_server:
     hostname: graphql-os.test
@@ -13,7 +13,6 @@ magento_os_graphql_server:
         - magento_os_graphql_app
     links:
         - magento_os_graphql_mysql:mysql
-        - magento_os_graphql_integation_tests:mysql_integ_test
     environment:
         - DOCKER_FIX=
         - VIRTUAL_HOST=graphql-os.test
@@ -28,21 +27,9 @@ magento_os_graphql_mysql:
     image: mysql:5.6
     restart: always
     volumes:
-        - ../shared/mysql:/var/lib/mysql
+        - ../shared/mysql:/var/lib/mysql:delegated
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: db
         MYSQL_USER: root
         MYSQL_PASSWORD: root
-
-magento_os_graphql_integation_tests:
-    container_name: magento_os_graphql_integation_tests
-    image: mysql:5.6
-    restart: always
-    volumes:
-        - ../shared/mysql_integrational:/var/lib/mysql
-    environment:
-        MYSQL_ROOT_PASSWORD: 123123q
-        MYSQL_DATABASE: magento_os_graphql_integation_tests
-        MYSQL_USER: root
-        MYSQL_PASSWORD: 123123q
