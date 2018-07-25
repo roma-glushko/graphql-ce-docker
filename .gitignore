@@ -2,3 +2,4 @@ shared
 src
 !src/.gitkeep
 .idea
+docker/.env

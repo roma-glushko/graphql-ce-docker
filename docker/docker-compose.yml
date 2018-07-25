@@ -18,7 +18,7 @@ magento_os_graphql_server:
         - VIRTUAL_HOST=graphql-os.test
         - ENABLE_SENDMAIL=true
         - PHP_IDE_CONFIG="serverName=graphql-os.test"
-        - XDEBUG_REMOTE_HOST=192.168.0.104
+        - XDEBUG_REMOTE_HOST="${XDEBUG_REMOTE_HOST}"
     ports:
         - 80:80
 
