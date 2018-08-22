@@ -1,16 +1,12 @@
-magento_os_graphql_app:
-    container_name: magento_os_graphql_app
-    image: busybox
-    volumes:
-        - ../src:/var/www/html/:cached
-        - ../shared/.composer:/root/.composer/:delegated
-
-magento_os_graphql_server:
+version: '2'
+services:
+  magento_os_graphql_server:
     hostname: graphql-os.test
     container_name: magento_os_graphql_server
     build: containers/apache
-    volumes_from:
-        - magento_os_graphql_app
+    volumes:
+        - magento_os_graphql_app_sync:/var/www/html/:nocopy
+        - ../shared/.composer:/root/.composer/:cached
     links:
         - magento_os_graphql_mysql:mysql
     environment:
@@ -22,14 +18,18 @@ magento_os_graphql_server:
     ports:
         - 80:80
 
-magento_os_graphql_mysql:
+  magento_os_graphql_mysql:
     container_name: magento_os_graphql_mysql
     image: mysql:5.6
     restart: always
     volumes:
-        - ../shared/mysql:/var/lib/mysql:delegated
+        - ../shared/mysql:/var/lib/mysql:cached
     environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: db
         MYSQL_USER: root
         MYSQL_PASSWORD: root
+
+volumes:
+  magento_os_graphql_app_sync:
+    external: true

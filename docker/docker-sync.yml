@@ -1,0 +1,11 @@
+version: '2'
+options:
+  verbose: true
+syncs:
+  magento_os_graphql_app_sync:
+    src: '../src/'
+    sync_strategy: 'native_osx'
+    sync_excludes_type: 'Path'
+    sync_excludes: ['var/cache', 'var/page_cache', 'var/generation', 'var/view_preprocessed', '.idea', 'generated']
+    sync_userid: 33
+    sync_groupid: 33
